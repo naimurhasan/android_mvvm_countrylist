@@ -3,6 +3,7 @@ package com.yildiz.mvvm_countrylist.view
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.yildiz.mvvm_countrylist.R
 import com.yildiz.mvvm_countrylist.databinding.ActivityMainBinding
 import com.yildiz.mvvm_countrylist.viewmodel.CountViewModel
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         countViewModel.countModel.observe(this){
-            countModel -> binding.helloTextView.text = "Count: ${countModel.count}"
+            countModel -> binding.helloTextView.text = getString(R.string.count_text, countModel.count)
         }
     }
 }
