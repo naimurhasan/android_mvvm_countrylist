@@ -4,26 +4,32 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.yildiz.mvvm_countrylist.R
+import com.yildiz.mvvm_countrylist.adapter.CountryBasicAdapter
 import com.yildiz.mvvm_countrylist.databinding.ActivityMainBinding
-import com.yildiz.mvvm_countrylist.viewmodel.CountViewModel
+import com.yildiz.mvvm_countrylist.viewmodel.CountryBasicListViewModel
+import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val countViewModel: CountViewModel by viewModels()
+    private val viewModel: CountryBasicListViewModel by viewModels()
+    private lateinit var adapter: CountryBasicAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.helloTextView.text = "Hello, View Binding!"
 
-        binding.actionButton.setOnClickListener {
-            countViewModel.increment();
+        adapter = CountryBasicAdapter(this, ArrayList())
+        binding.listview.adapter = adapter
+
+        // observe
+        viewModel.countryList.observe(this) { countries ->
+            adapter.updateCountries(countries)
         }
 
-        countViewModel.countModel.observe(this){
-            countModel -> binding.helloTextView.text = getString(R.string.count_text, countModel.count)
-        }
+        viewModel.refresh();
+
+
     }
 }

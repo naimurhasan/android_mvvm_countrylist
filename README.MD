@@ -1,3 +1,3 @@
-### Counter App
+### Basic ListView with Adapter
 
-![Screenshot](screenshots/Screenshot_1.png)
+![Screenshot](screenshots/Screenshot_2.png)
