@@ -39,6 +39,7 @@ android {
     }
 }
 val mvvmV = "2.6.2"
+val recylerV = "1.2.1"
 
 dependencies {
 
@@ -50,6 +51,8 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$mvvmV")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$mvvmV")
+
+    implementation("androidx.recyclerview:recyclerview:$recylerV")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

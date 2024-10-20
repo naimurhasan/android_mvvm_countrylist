@@ -1,18 +1,22 @@
 package com.yildiz.mvvm_countrylist.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.yildiz.mvvm_countrylist.R
-import com.yildiz.mvvm_countrylist.adapter.CountryBasicAdapter
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.yildiz.mvvm_countrylist.adapter.CountryAdapter
 import com.yildiz.mvvm_countrylist.databinding.ActivityMainBinding
-import com.yildiz.mvvm_countrylist.viewmodel.CountryBasicListViewModel
+import com.yildiz.mvvm_countrylist.viewmodel.CountryListViewModel
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: CountryBasicListViewModel by viewModels()
-    private lateinit var adapter: CountryBasicAdapter
+    private val viewModel: CountryListViewModel by viewModels()
+    private lateinit var countryAdapter : CountryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,16 +24,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = CountryBasicAdapter(this, ArrayList())
-        binding.listview.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // observe
-        viewModel.countryList.observe(this) { countries ->
-            adapter.updateCountries(countries)
-        }
+        viewModel.countryList.observe(this, Observer { countryList ->
+            countryAdapter = CountryAdapter(countryList)
+            binding.recyclerView.adapter = countryAdapter
+        })
 
-        viewModel.refresh();
+        viewModel.isLoading.observe(this, Observer { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        })
 
-
+        viewModel.refresh()
     }
 }
