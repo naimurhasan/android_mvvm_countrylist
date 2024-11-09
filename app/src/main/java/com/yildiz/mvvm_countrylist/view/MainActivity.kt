@@ -35,6 +35,10 @@ class MainActivity : AppCompatActivity() {
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         })
 
+        viewModel.countryLoadError.observe(this, Observer { hasError ->
+            binding.errorTextView.visibility = if (hasError) View.VISIBLE else View.GONE
+        })
+
         viewModel.refresh()
     }
 }

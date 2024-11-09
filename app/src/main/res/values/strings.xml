@@ -2,4 +2,5 @@
     <string name="app_name">MVVM_CountryList</string>
     <string name="count_text">Count: %1$d</string>
     <string name="country_list">Country List</string>
+    <string name="an_error_occurred">An error occurred</string>
 </resources>

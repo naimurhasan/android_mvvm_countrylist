@@ -40,6 +40,9 @@ android {
 }
 val mvvmV = "2.6.2"
 val recylerV = "1.2.1"
+val retrofit = "2.9.0"
+val coroutine = "1.6.0"
+val okhttp = "4.9.1"
 
 dependencies {
 
@@ -53,6 +56,15 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$mvvmV")
 
     implementation("androidx.recyclerview:recyclerview:$recylerV")
+
+    implementation("com.squareup.retrofit2:retrofit:$retrofit")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit")
+
+    // Coroutines core and Android support
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine")
+
+    implementation("com.squareup.okhttp3:logging-interceptor:$okhttp")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
