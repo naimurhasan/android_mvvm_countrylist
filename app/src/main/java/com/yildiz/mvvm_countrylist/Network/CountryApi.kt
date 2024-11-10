@@ -6,10 +6,10 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface CountryApi {
-    //    @GET("api/countries?expand=false&fields=name,flag")
+    // https://countryinfoapi.com/api/countries?expand=false&fields=name,flag
     @GET("api/countries")
     suspend fun getCountries(
         @Query("expand") expand: Boolean = false,
-        @Query("fields") fields: String = "name,flag"
+        @Query("fields") fields: String = "name,flag,capital",
     ) : ArrayList<CountryModel>;
 }

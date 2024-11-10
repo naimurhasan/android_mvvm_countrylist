@@ -43,6 +43,7 @@ val recylerV = "1.2.1"
 val retrofit = "2.9.0"
 val coroutine = "1.6.0"
 val okhttp = "4.9.1"
+val coil = "2.3.0"
 
 dependencies {
 
@@ -57,14 +58,19 @@ dependencies {
 
     implementation("androidx.recyclerview:recyclerview:$recylerV")
 
+    // network
     implementation("com.squareup.retrofit2:retrofit:$retrofit")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit")
+    implementation("com.squareup.okhttp3:logging-interceptor:$okhttp")
 
     // Coroutines core and Android support
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine")
 
-    implementation("com.squareup.okhttp3:logging-interceptor:$okhttp")
+    // image caching
+    implementation("io.coil-kt:coil:$coil")
+    implementation("io.coil-kt:coil-svg:$coil")
+    implementation(libs.androidx.swiperefreshlayout)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -4,10 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import coil.decode.SvgDecoder
+import coil.load
 import com.yildiz.mvvm_countrylist.R
 import com.yildiz.mvvm_countrylist.model.CountryModel
 
@@ -30,11 +32,30 @@ class CountryAdapter(private var countryList: ArrayList<CountryModel>) : Recycle
     override fun onBindViewHolder(holder: CountryAdapter.CountryViewHolder, position: Int) {
         val country = countryList[position]
         holder.tvName.text =  country.name
-        holder.tvCapital.text = country.capital
+
+        holder.tvCapital.text = if (!country.capital.isNullOrEmpty()) {
+            country.capital[0]
+        }else{
+            ""
+        }
+
+        val imageContext = holder.ivFlag.context
+        holder.ivFlag.load(country.flag) {
+            decoderFactory { result, options, _ -> SvgDecoder(result.source, options) }
+            placeholder(createCircularProgressDrawable(imageContext))
+            error(android.R.drawable.ic_menu_report_image)
+            crossfade(true)
+        }
     }
 
     override fun getItemCount(): Int = countryList.size
 
-
+    private fun createCircularProgressDrawable(context: Context): CircularProgressDrawable {
+        return CircularProgressDrawable(context).apply {
+            strokeWidth = 5f
+            centerRadius = 30f
+            start()
+        }
+    }
 
 }

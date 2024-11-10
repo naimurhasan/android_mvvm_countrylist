@@ -17,6 +17,8 @@
 
     <TextView
         android:id="@+id/tvName"
+        android:layout_marginStart="20dp"
+        android:textSize="20sp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Country Name"
@@ -27,6 +29,7 @@
 
     <TextView
         android:id="@+id/tvCapital"
+        android:layout_marginStart="20dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Capital"
