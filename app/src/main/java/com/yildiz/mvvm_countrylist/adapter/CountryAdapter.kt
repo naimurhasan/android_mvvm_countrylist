@@ -12,6 +12,7 @@ import coil.decode.SvgDecoder
 import coil.load
 import com.yildiz.mvvm_countrylist.R
 import com.yildiz.mvvm_countrylist.model.CountryModel
+import com.yildiz.mvvm_countrylist.utils.ImageLoader
 
 class CountryAdapter(private var countryList: ArrayList<CountryModel>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>(){
 
@@ -40,22 +41,9 @@ class CountryAdapter(private var countryList: ArrayList<CountryModel>) : Recycle
         }
 
         val imageContext = holder.ivFlag.context
-        holder.ivFlag.load(country.flag) {
-            decoderFactory { result, options, _ -> SvgDecoder(result.source, options) }
-            placeholder(createCircularProgressDrawable(imageContext))
-            error(android.R.drawable.ic_menu_report_image)
-            crossfade(true)
-        }
+        ImageLoader.loadImage(holder.ivFlag, country.flag, imageContext)
     }
 
     override fun getItemCount(): Int = countryList.size
-
-    private fun createCircularProgressDrawable(context: Context): CircularProgressDrawable {
-        return CircularProgressDrawable(context).apply {
-            strokeWidth = 5f
-            centerRadius = 30f
-            start()
-        }
-    }
 
 }
