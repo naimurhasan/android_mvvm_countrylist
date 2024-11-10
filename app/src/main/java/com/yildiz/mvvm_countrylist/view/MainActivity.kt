@@ -39,6 +39,11 @@ class MainActivity : AppCompatActivity() {
             binding.errorTextView.visibility = if (hasError) View.VISIBLE else View.GONE
         })
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.refresh()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
         viewModel.refresh()
     }
 }
